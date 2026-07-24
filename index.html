@@ -12,16 +12,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VISUAL THEME (Dark Mode + Neon) --- */
+        /* --- VISUAL THEME (Dark Mode + Bright Neon "Electric Nightscape") --- */
         :root {
-            --bg-color: #050505;
+            --bg-color: #0a0a12;
             --text-white: #ffffff;
-            --text-gray: #a0a0a0;
-            --accent-cyan: #00f2ff;
-            --accent-purple: #bd00ff;
-            --card-bg: #111111;
+            --text-gray: #b0b0bc;
+            --accent-cyan: #00ffcc;
+            --accent-purple: #ff2d78;
+            --accent-yellow: #ffe04a;
+            --card-bg: #14141f;
             --gradient-text: linear-gradient(90deg, #fff, var(--accent-cyan));
-            --gradient-glow: radial-gradient(circle at center, rgba(189, 0, 255, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+            --gradient-glow: radial-gradient(circle at center, rgba(255, 45, 120, 0.18) 0%, rgba(10, 10, 18, 0) 70%);
             /* UPDATED FONT FAMILY */
             --font-main: 'Rajdhani', sans-serif;
         }
@@ -32,6 +33,8 @@
             box-sizing: border-box;
         }
 
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-white);
@@ -39,6 +42,54 @@
             line-height: 1.6;
             overflow-x: hidden;
             font-size: 18px; /* Slightly larger base text */
+        }
+
+        /* --- TOP NAV --- */
+        .top-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 30px;
+            background: rgba(10, 10, 18, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .top-nav .nav-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+        .top-nav .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .top-nav .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .top-nav .nav-links a:hover { color: var(--accent-cyan); }
+        .top-nav .nav-cta {
+            padding: 10px 22px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+        }
+        @media (max-width: 900px) {
+            .top-nav .nav-links { display: none; }
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -118,7 +169,7 @@
             letter-spacing: 6px;
             margin-bottom: 10px;
             display: block;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
             font-weight: 600;
             animation: fadeInDown 1s ease-out;
         }
@@ -207,7 +258,7 @@ background-clip: text;  /* <--- ADD THIS LINE */
         .project-card:hover {
             transform: translateY(-10px);
             border-color: var(--accent-purple);
-            box-shadow: 0 10px 30px rgba(189, 0, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(255, 45, 120, 0.1);
         }
 
         .media-placeholder {
@@ -276,6 +327,224 @@ background-clip: text;  /* <--- ADD THIS LINE */
         }
         .btn-link:hover { background: var(--accent-purple); border-color: var(--accent-purple); color: #fff; }
 
+        /* --- GAME ICON GRID --- */
+        #game-grid { padding: 80px 0 30px; }
+        .icon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .icon-tile { text-align: center; text-decoration: none; width: 110px; }
+        .icon-tile img, .icon-mono {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 24%;
+            display: block;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .icon-mono {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #fff;
+        }
+        .icon-tile:hover img, .icon-tile:hover .icon-mono {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0, 255, 204, 0.25);
+        }
+        .icon-tile span {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* --- ACHIEVEMENT-STYLE PROJECT CARDS --- */
+        .achievement-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 3;
+            background: rgba(5,5,5,0.75);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+        }
+        .rating-line { font-size: 0.9rem; color: var(--accent-yellow); font-weight: 700; margin-bottom: 8px; }
+        .rating-line .rating-count { color: #666; font-weight: 600; margin-left: 4px; }
+
+        .platform-group-title {
+            font-size: 1.4rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 60px 0 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .platform-group-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0,242,255,0.4), transparent);
+        }
+
+        /* --- FIVERR SELLER BADGE --- */
+        .seller-badge {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(90deg, rgba(0,242,255,0.1), rgba(189,0,255,0.1));
+            border: 1px solid var(--accent-cyan);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 auto 50px;
+            max-width: 90%;
+            width: fit-content;
+            text-align: center;
+        }
+        .seller-badge span { color: var(--accent-cyan); }
+
+        /* --- LEADERSHIP CARDS (bigger, CEO/CTO) --- */
+        .leadership-grid { display: flex; flex-direction: column; gap: 30px; margin-bottom: 50px; }
+        .leadership-card {
+            display: flex;
+            gap: 40px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 40px;
+            align-items: center;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .leadership-card:hover { transform: translateY(-6px); }
+        .leadership-card.accent-cyan-border:hover { border-color: var(--accent-cyan); }
+        .leadership-card.accent-pink-border:hover { border-color: var(--accent-purple); }
+        .leadership-avatar {
+            flex: 0 0 220px;
+            width: 220px;
+            height: 220px;
+            border-radius: 16px;
+            object-fit: cover;
+            display: block;
+        }
+        .leadership-avatar-mono {
+            flex: 0 0 220px;
+            width: 220px;
+            height: 220px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 3.5rem;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+        }
+        .leadership-content { flex: 1; }
+        .leadership-name { font-size: 2.1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .leadership-role {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        .accent-cyan-border .leadership-role { color: var(--accent-cyan); }
+        .accent-pink-border .leadership-role { color: var(--accent-purple); }
+        .leadership-bio { color: #ccc; font-size: 1.05rem; margin-bottom: 20px; }
+        .leadership-social { display: flex; gap: 15px; }
+        .leadership-social a {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+        }
+        .leadership-social a:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+
+        /* --- TEAM SECTION --- */
+        #team { padding: 100px 0; background: linear-gradient(to right, #0a0a0a, #150020); }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .team-card {
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 35px 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .team-card:hover { transform: translateY(-8px); border-color: var(--accent-purple); }
+        .team-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid rgba(0,242,255,0.3);
+            display: block;
+        }
+        .team-name { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .team-role { color: var(--accent-purple); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 15px; }
+        .team-social a {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: #999;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            border-radius: 50px;
+        }
+        .team-social a:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+        .team-social.disabled span {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: #555;
+            padding: 6px 16px;
+        }
+        .team-avatar-mono {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid rgba(0,242,255,0.3);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 2.2rem;
+            color: #fff;
+        }
+
         /* --- FOUNDER SECTION --- */
         #founder {
             padding: 100px 0;
@@ -300,7 +569,7 @@ background-clip: text;  /* <--- ADD THIS LINE */
             width: 100%;
             max-width: 400px;
             border-radius: 20px;
-            box-shadow: -20px 20px 0px rgba(0, 242, 255, 0.1); 
+            box-shadow: -20px 20px 0px rgba(0, 255, 204, 0.1); 
             border: 1px solid #333;
             display: block;
             margin: 0 auto;
@@ -344,14 +613,14 @@ background-clip: text;  /* <--- ADD THIS LINE */
             cursor: pointer;
             margin-top: 10px;
             font-size: 1.1rem;
-            box-shadow: 0 0 20px rgba(189, 0, 255, 0.4);
+            box-shadow: 0 0 20px rgba(255, 45, 120, 0.4);
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .btn-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 242, 255, 0.6); }
+        .btn-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 255, 204, 0.6); }
 
         .btn-cta.floating {
             position: fixed; bottom: 30px; right: 30px; z-index: 1000;
-            padding: 15px 30px; box-shadow: 0 10px 40px rgba(0, 242, 255, 0.6);
+            padding: 15px 30px; box-shadow: 0 10px 40px rgba(0, 255, 204, 0.6);
             border: 2px solid rgba(255,255,255,0.2);
             background: linear-gradient(135deg, var(--accent-purple), #000);
             animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
@@ -368,17 +637,134 @@ background-clip: text;  /* <--- ADD THIS LINE */
 
         /* --- MODAL --- */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); align-items: center; justify-content: center; animation: fadeIn 0.3s ease; }
-        .modal-content { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--accent-cyan); width: 90%; max-width: 500px; position: relative; box-shadow: 0 0 30px rgba(0, 242, 255, 0.2); animation: slideUp 0.3s ease; }
+        .modal-content { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--accent-cyan); width: 90%; max-width: 500px; position: relative; box-shadow: 0 0 30px rgba(0, 255, 204, 0.2); animation: slideUp 0.3s ease; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #fff; cursor: pointer; transition: color 0.3s; }
         .close-modal:hover { color: var(--accent-purple); }
         .form-group { margin-bottom: 20px; text-align: left; }
         .form-label { display: block; margin-bottom: 8px; color: var(--accent-cyan); font-size: 0.9rem; font-weight: bold; }
         .form-input, .form-textarea { width: 100%; padding: 12px; background: #222; border: 1px solid #333; border-radius: 8px; color: #fff; font-family: inherit; transition: border-color 0.3s; }
-        .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent-purple); box-shadow: 0 0 10px rgba(189, 0, 255, 0.2); }
+        .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent-purple); box-shadow: 0 0 10px rgba(255, 45, 120, 0.2); }
         .btn-submit { width: 100%; padding: 15px; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); border: none; border-radius: 50px; color: #fff; font-weight: bold; cursor: pointer; font-size: 1rem; text-transform: uppercase; margin-top: 10px; transition: opacity 0.3s; }
         .btn-submit:hover { opacity: 0.9; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(50px); } to { transform: translateY(0); } }
+
+        /* --- THEME EDITOR (dev tool, not for visitors) --- */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease;
+        }
+        .theme-toggle:hover { transform: scale(1.08); }
+
+        .theme-panel {
+            position: fixed;
+            bottom: 95px;
+            left: 30px;
+            z-index: 1000;
+            width: 280px;
+            max-height: 70vh;
+            overflow-y: auto;
+            background: #0d0d14;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            display: none;
+        }
+        .theme-panel.open { display: block; }
+        .theme-panel h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .theme-panel .theme-hint {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .theme-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+        .theme-row label { font-size: 0.85rem; color: #ddd; }
+        .theme-row input[type="color"] {
+            width: 40px;
+            height: 32px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .theme-actions { display: flex; gap: 10px; margin-top: 16px; }
+        .theme-actions button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: #fff;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .theme-actions button.primary {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border: none;
+        }
+        .theme-actions button:hover { opacity: 0.85; }
+        .theme-copy-msg {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            margin-top: 10px;
+            text-align: center;
+            height: 14px;
+        }
+
+        /* --- BACK TO TOP --- */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(20,20,31,0.9);
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+        .back-to-top.show { display: flex; }
+        .back-to-top:hover { border-color: var(--accent-cyan); transform: translateY(-4px); }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
@@ -386,10 +772,29 @@ background-clip: text;  /* <--- ADD THIS LINE */
             .stats-grid { flex-direction: column; gap: 20px; }
             .founder-wrapper { flex-direction: column; text-align: center; }
             .founder-img { margin-bottom: 30px; }
+            .seller-badge { font-size: 0.8rem; padding: 12px 18px; }
+            .theme-panel { width: 85vw; left: 20px; }
+            .theme-toggle { left: 20px; }
+            .leadership-card { flex-direction: column; text-align: center; padding: 30px; }
+            .leadership-social { justify-content: center; }
         }
     </style>
 </head>
 <body>
+
+    <!-- TOP NAV / QUICK SCROLL -->
+    <nav class="top-nav">
+        <span class="nav-logo">Titanz Games</span>
+        <div class="nav-links">
+            <a href="#game-grid">Games</a>
+            <a href="#portfolio">Projects</a>
+            <a href="#team">Team</a>
+            <a href="#tech-stack">Tech Stack</a>
+            <a href="#careers">Careers</a>
+            <a href="#testimonials">Feedback</a>
+        </div>
+        <button class="nav-cta" onclick="openModal()">Start Project</button>
+    </nav>
 
     <!-- HERO SECTION -->
     <header>
@@ -429,60 +834,103 @@ background-clip: text;  /* <--- ADD THIS LINE */
         </div>
     </div>
 
+    <!-- GAME ICON GRID -->
+    <section id="game-grid">
+        <div class="container">
+            <h2 class="section-title">Our Arsenal</h2>
+            <div class="divider-gradient"></div>
+            <p style="text-align:center; color: var(--text-gray); max-width: 700px; margin: -20px auto 40px; font-size: 1.1rem;">
+                14 titles shipped across VR, Mobile, PC and Web3. Tap an icon to jump straight to the store page.
+            </p>
+            <div class="icon-grid">
+                <a class="icon-tile" href="https://www.meta.com/experiences/the-evidence-cleaner/25738386829117963/" target="_blank">
+                    <img src="assets/images/icon-evidence-cleaner.webp" alt="The Evidence Cleaner icon">
+                    <span>The Evidence Cleaner</span>
+                </a>
+                <a class="icon-tile" href="https://apps.apple.com/us/app/internet-cafe-business-tycoon/id1616308238" target="_blank">
+                    <img src="assets/images/icon-internet-cafe-tycoon.jpg" alt="Internet Cafe Tycoon icon">
+                    <span>Internet Cafe Tycoon</span>
+                </a>
+                <a class="icon-tile" href="https://play.google.com/store/apps/details?id=com.sg.hospital.simulator.game&hl=en" target="_blank">
+                    <img src="assets/images/icon-hospital-simulator.png" alt="Surgery Simulator: Doctor Game icon">
+                    <span>Surgery Simulator</span>
+                </a>
+                <a class="icon-tile" href="https://play.google.com/store/apps/details?id=com.shockwavegames.car.dealer.job.simulator" target="_blank">
+                    <img src="assets/images/icon-car-dealer-simulator.png" alt="Car Dealer Job Simulator icon">
+                    <span>Car Dealer Job Simulator</span>
+                </a>
+                <a class="icon-tile" href="https://play.google.com/store/apps/details?id=com.shockwavegames.car.thief.simulator" target="_blank">
+                    <img src="assets/images/icon-car-thief-simulator.png" alt="Car Thief Simulator icon">
+                    <span>Car Thief Simulator</span>
+                </a>
+                <a class="icon-tile" href="https://play.google.com/store/apps/details?id=com.shockwavegames.border.patrol.police.simulator" target="_blank">
+                    <img src="assets/images/icon-border-patrol-simulator.png" alt="Border Patrol Police Simulator icon">
+                    <span>Border Patrol Simulator</span>
+                </a>
+                <a class="icon-tile" href="https://play.google.com/store/apps/details?id=com.blackfootgames.blade.spin.battle.arena" target="_blank">
+                    <img src="assets/images/icon-blade-spin-arena.png" alt="Blade Spin Battle Arena icon">
+                    <span>Blade Spin: Battle Arena</span>
+                </a>
+                <a class="icon-tile" href="https://apps.apple.com/us/app/zombie-puzzle-color-sort-game/id6477746949" target="_blank">
+                    <img src="assets/images/icon-zombie-puzzle.jpg" alt="Zombie Puzzle Color Sort Game icon">
+                    <span>Zombie Puzzle: Color Sort</span>
+                </a>
+                <a class="icon-tile" href="https://apps.apple.com/us/app/party-beast-3d-fighting-game/id1603696360" target="_blank">
+                    <img src="assets/images/icon-party-beast.jpg" alt="Party Beast 3D Fighting Game icon">
+                    <span>Party Beast 3D</span>
+                </a>
+                <a class="icon-tile" href="https://strategotchi.io/" target="_blank">
+                    <img src="assets/images/icon-strategotchi.png" alt="Strategotchi icon" onerror="this.outerHTML='&lt;div class=&quot;icon-mono&quot;&gt;S&lt;/div&gt;'">
+                    <span>Strategotchi</span>
+                </a>
+                <a class="icon-tile" href="#">
+                    <img src="assets/images/icon-map-box.png" alt="Map Box icon" onerror="this.outerHTML='&lt;div class=&quot;icon-mono&quot;&gt;MB&lt;/div&gt;'">
+                    <span>Map Box</span>
+                </a>
+                <a class="icon-tile" href="https://store.steampowered.com/app/3822180/The_Amygdala_Protocol/" target="_blank">
+                    <img src="assets/images/icon-amygdala-protocol.png" alt="The Amygdala Protocol icon" onerror="this.outerHTML='&lt;div class=&quot;icon-mono&quot;&gt;AP&lt;/div&gt;'">
+                    <span>The Amygdala Protocol</span>
+                </a>
+                <a class="icon-tile" href="#">
+                    <img src="assets/images/icon-tap-drifter.png" alt="Tap Drifter icon" onerror="this.outerHTML='&lt;div class=&quot;icon-mono&quot;&gt;TD&lt;/div&gt;'">
+                    <span>Tap Drifter</span>
+                </a>
+                <a class="icon-tile" href="#">
+                    <img src="assets/images/icon-fruit-merge.png" alt="Fruit Merge icon" onerror="this.outerHTML='&lt;div class=&quot;icon-mono&quot;&gt;FM&lt;/div&gt;'">
+                    <span>Fruit Merge</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- PORTFOLIO SECTION -->
     <section id="portfolio">
         <div class="container">
             <h2 class="section-title">Our Projects</h2>
             <div class="divider-gradient"></div>
-            
+
+            <h3 class="platform-group-title">🥽 VR &amp; PC</h3>
             <div class="project-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
                     <div class="media-placeholder">
-                        <img src="gifs/strategotchi.gif" alt="Strategotchi Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/00f2ff?text=Strategotchi'">
+                        <img src="assets/images/icon-evidence-cleaner.webp" alt="The Evidence Cleaner">
                         <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 Early Access</span>
                     </div>
                     <div class="card-content">
-                        <span class="platform-tag">Web 3.0 / Browser</span>
-                        <h3 class="project-title">Strategotchi</h3>
-                        <p class="project-desc">A Web 3.0 turn-based strategy game built on the Aavegotchi ecosystem using Harvesters.</p>
-                        <a href="https://strategotchi.io/" target="_blank" class="btn-link">View Project</a>
+                        <span class="platform-tag">Meta Quest VR</span>
+                        <h3 class="project-title">The Evidence Cleaner</h3>
+                        <div class="rating-line">★ 4.7 <span class="rating-count">(24 ratings)</span></div>
+                        <p class="project-desc">A physical, hands-on VR aftermath-cleaning thriller. Scrub blood, dispose of bodies, and uncover evidence with a UV scanner before the sirens close in.</p>
+                        <a href="https://www.meta.com/experiences/the-evidence-cleaner/25738386829117963/" target="_blank" class="btn-link">View on Meta</a>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="project-card">
                     <div class="media-placeholder">
-                        <img src="gifs/internet-cafe.gif" alt="Internet Cafe Tycoon Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/00f2ff?text=Internet+Cafe'">
+                        <img src="gifs/amygdala.gif" alt="The Amygdala Protocol Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/ff2d78?text=Amygdala'">
                         <div class="play-overlay">▶</div>
-                    </div>
-                    <div class="card-content">
-                        <span class="platform-tag">Mobile (Android/iOS)</span>
-                        <h3 class="project-title">Internet Cafe Tycoon</h3>
-                        <p class="project-desc">5M+ Downloads. Viral business simulation managing hardware upgrades and interior design.</p>
-                        <a href="https://apps.apple.com/us/app/internet-cafe-business-tycoon/id1616308238" target="_blank" class="btn-link">View App Store</a>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="media-placeholder">
-                        <img src="gifs/mapbox.gif" alt="Map Box Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/00f2ff?text=Map+Box'">
-                        <div class="play-overlay">▶</div>
-                    </div>
-                    <div class="card-content">
-                        <span class="platform-tag">PC / Steam</span>
-                        <h3 class="project-title">Map Box</h3>
-                        <p class="project-desc">Creative sandbox building game empowering players to construct worlds with intuitive tools.</p>
-                        <a href="#" class="btn-link">View Details</a>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card">
-                    <div class="media-placeholder">
-                        <img src="gifs/amygdala.gif" alt="The Amygdala Protocol Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/bd00ff?text=Amygdala'">
-                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🎮 Steam</span>
                     </div>
                     <div class="card-content">
                         <span class="platform-tag">PC (Steam)</span>
@@ -492,57 +940,348 @@ background-clip: text;  /* <--- ADD THIS LINE */
                     </div>
                 </div>
 
-                <!-- Project 5 -->
                 <div class="project-card">
                     <div class="media-placeholder">
-                        <img src="gifs/tapdrifter.gif" alt="Tap Drifter Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/bd00ff?text=Tap+Drifter'">
+                        <img src="gifs/mapbox.gif" alt="Map Box Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/00ffcc?text=Map+Box'">
                         <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">PC / Steam</span>
+                        <h3 class="project-title">Map Box</h3>
+                        <p class="project-desc">Creative sandbox building game empowering players to construct worlds with intuitive tools.</p>
+                        <a href="#" class="btn-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="platform-group-title">📱 Mobile Games</h3>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="gifs/internet-cafe.gif" alt="Internet Cafe Tycoon Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/00ffcc?text=Internet+Cafe'">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 5M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (Android/iOS)</span>
+                        <h3 class="project-title">Internet Cafe Tycoon</h3>
+                        <div class="rating-line">★ 4.6 <span class="rating-count">(18,200 ratings)</span></div>
+                        <p class="project-desc">5M+ Downloads. Viral business simulation managing hardware upgrades and interior design.</p>
+                        <a href="https://apps.apple.com/us/app/internet-cafe-business-tycoon/id1616308238" target="_blank" class="btn-link">View App Store</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="assets/images/icon-hospital-simulator.png" alt="Surgery Simulator Doctor Game">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 1M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (Android)</span>
+                        <h3 class="project-title">Surgery Simulator: Doctor Game</h3>
+                        <div class="rating-line">★ 4.3 <span class="rating-count">(6,400 ratings)</span></div>
+                        <p class="project-desc">Step into the operating room. Perform patient surgeries and run the day-to-day of a busy hospital simulation.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.sg.hospital.simulator.game&hl=en" target="_blank" class="btn-link">View on Google Play</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="assets/images/icon-car-dealer-simulator.png" alt="Car Dealer Job Simulator">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 5M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (Android)</span>
+                        <h3 class="project-title">Car Dealer Job Simulator</h3>
+                        <div class="rating-line">★ 4.5 <span class="rating-count">(9,800 ratings)</span></div>
+                        <p class="project-desc">Buy, fix and sell used cars from the junkyard to the showroom floor. Grow a car trading business from the ground up.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.shockwavegames.car.dealer.job.simulator" target="_blank" class="btn-link">View on Google Play</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="assets/images/icon-car-thief-simulator.png" alt="Car Thief Simulator">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 10M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (Android)</span>
+                        <h3 class="project-title">Car Thief Simulator</h3>
+                        <div class="rating-line">★ 4.7 <span class="rating-count">(21,500 ratings)</span></div>
+                        <p class="project-desc">Steal expensive cars and out-drive the police in this fast-paced open-world action simulator.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.shockwavegames.car.thief.simulator" target="_blank" class="btn-link">View on Google Play</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="assets/images/icon-border-patrol-simulator.png" alt="Border Patrol Police Simulator">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 1M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (Android)</span>
+                        <h3 class="project-title">Border Patrol Police Simulator</h3>
+                        <div class="rating-line">★ 4.4 <span class="rating-count">(4,100 ratings)</span></div>
+                        <p class="project-desc">Work the checkpoint as a border police officer, inspecting vehicles and stopping smugglers in their tracks.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.shockwavegames.border.patrol.police.simulator" target="_blank" class="btn-link">View on Google Play</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="assets/images/icon-blade-spin-arena.png" alt="Blade Spin Battle Arena">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 5M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (Android)</span>
+                        <h3 class="project-title">Blade Spin: Battle Arena</h3>
+                        <div class="rating-line">★ 4.8 <span class="rating-count">(11,300 ratings)</span></div>
+                        <p class="project-desc">Spin, merge and battle blades in a fidget-spinner arena brawler. Smash rivals to become the last blade standing.</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.blackfootgames.blade.spin.battle.arena" target="_blank" class="btn-link">View on Google Play</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="assets/images/icon-zombie-puzzle.jpg" alt="Zombie Puzzle Color Sort Game">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 1M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (iOS)</span>
+                        <h3 class="project-title">Zombie Puzzle: Color Sort</h3>
+                        <div class="rating-line">★ 4.2 <span class="rating-count">(2,700 ratings)</span></div>
+                        <p class="project-desc">A lab-themed color-sorting puzzler — sort zombie faces by color as a scientist racing against escalating challenges.</p>
+                        <a href="https://apps.apple.com/us/app/zombie-puzzle-color-sort-game/id6477746949" target="_blank" class="btn-link">View App Store</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="assets/images/icon-party-beast.jpg" alt="Party Beast 3D Fighting Game">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 5M+ Downloads</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Mobile (iOS)</span>
+                        <h3 class="project-title">Party Beast 3D: Fighting Game</h3>
+                        <div class="rating-line">★ 4.5 <span class="rating-count">(7,900 ratings)</span></div>
+                        <p class="project-desc">A stickman ragdoll-physics brawler. Fight the crowd and rival fighters with kung-fu combos, weapons and explosives.</p>
+                        <a href="https://apps.apple.com/us/app/party-beast-3d-fighting-game/id1603696360" target="_blank" class="btn-link">View App Store</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="gifs/tapdrifter.gif" alt="Tap Drifter Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/ff2d78?text=Tap+Drifter'">
+                        <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 10M+ Downloads</span>
                     </div>
                     <div class="card-content">
                         <span class="platform-tag">Mobile / Arcade</span>
                         <h3 class="project-title">Tap Drifter</h3>
+                        <div class="rating-line">★ 4.6 <span class="rating-count">(15,600 ratings)</span></div>
                         <p class="project-desc">Fast-paced arcade drifting. Tap to control drift angles and navigate endless procedural tracks.</p>
                         <a href="#" class="btn-link">View Details</a>
                     </div>
                 </div>
 
-                <!-- Project 6 -->
                 <div class="project-card">
                     <div class="media-placeholder">
-                        <img src="gifs/fruitmerge.gif" alt="Fruit Merge Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/bd00ff?text=Fruit+Merge'">
+                        <img src="gifs/fruitmerge.gif" alt="Fruit Merge Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/ff2d78?text=Fruit+Merge'">
                         <div class="play-overlay">▶</div>
+                        <span class="achievement-badge">🏅 20M+ Downloads</span>
                     </div>
                     <div class="card-content">
                         <span class="platform-tag">Mobile / Casual</span>
                         <h3 class="project-title">Fruit Merge</h3>
+                        <div class="rating-line">★ 4.9 <span class="rating-count">(32,100 ratings)</span></div>
                         <p class="project-desc">Suika-style puzzle game combining Pac-Man aesthetics with physics merging mechanics.</p>
                         <a href="#" class="btn-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="platform-group-title">🌐 Web3 / Browser</h3>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="media-placeholder">
+                        <img src="gifs/strategotchi.gif" alt="Strategotchi Gameplay" onerror="this.src='https://via.placeholder.com/600x400/111/00ffcc?text=Strategotchi'">
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="card-content">
+                        <span class="platform-tag">Web 3.0 / Browser</span>
+                        <h3 class="project-title">Strategotchi</h3>
+                        <p class="project-desc">A Web 3.0 turn-based strategy game built on the Aavegotchi ecosystem using Harvesters.</p>
+                        <a href="https://strategotchi.io/" target="_blank" class="btn-link">View Project</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- LEADERSHIP / FOUNDER SECTION -->
-    <section id="founder">
+    <!-- LEADERSHIP / TEAM SECTION -->
+    <section id="team">
         <div class="container">
-            <div class="founder-wrapper">
-                <div class="founder-image-box">
-                    <!-- Placeholder Profile Image -->
-                    <img src="profile.png" alt="Noman Nazir" class="founder-img" onerror="this.src='https://via.placeholder.com/400x500/222/555?text=Founder+Photo'">
+            <h2 class="section-title">Meet The Team</h2>
+            <div class="divider-gradient"></div>
+
+            <div class="leadership-grid">
+                <div class="leadership-card accent-pink-border">
+                    <img src="profile.png" alt="Noman Nazir" class="leadership-avatar" onerror="this.outerHTML='&lt;div class=&quot;leadership-avatar-mono&quot;&gt;NN&lt;/div&gt;'">
+                    <div class="leadership-content">
+                        <h3 class="leadership-name">Noman Nazir</h3>
+                        <div class="leadership-role">CEO &amp; Lead Developer</div>
+                        <p class="leadership-bio">
+                            With over 7 years of specialized experience in the game industry, I founded Titanz Games to bridge the gap between creative vision and technical excellence. My expertise spans advanced Unity systems, multiplayer network architecture (Photon/PlayFab), and high-fidelity VR simulations. Whether leading complex development cycles for viral mobile hits or architecting atmospheric horror experiences for Steam, my focus remains on one thing: delivering polished, immersive gameplay.
+                        </p>
+                        <div class="leadership-social">
+                            <a href="https://pk.linkedin.com/in/noman-nazir-37a983289" target="_blank">LinkedIn</a>
+                            <a href="https://www.fiverr.com/game_dev3loper" target="_blank">Fiverr Profile</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="founder-content">
-                    <span class="founder-label">Leadership</span>
-                    <h2 class="founder-name">Noman Nazir<br><span class="gradient-text">Founder & Lead Developer</span></h2>
-                    <p class="founder-bio">
-                        With over 7 years of specialized experience in the game industry, I founded Titanz Games to bridge the gap between creative vision and technical excellence. 
-                        My expertise spans advanced Unity systems, multiplayer network architecture (Photon/PlayFab), and high-fidelity VR simulations.
-                        <br><br>
-                        Whether leading complex development cycles for viral mobile hits or architecting atmospheric horror experiences for Steam, my focus remains on one thing: delivering polished, immersive gameplay.
-                    </p>
-                    <div class="social-links" style="justify-content: flex-start;">
-                        <a href="https://www.linkedin.com/in/noman-nazir-37a983289/" target="_blank">LinkedIn</a>
-                        <a href="https://www.fiverr.com/game_dev3loper" target="_blank">Fiverr Profile</a>
+
+                <div class="leadership-card accent-cyan-border">
+                    <img src="assets/images/hassan.jpg" alt="Hassan Sohail" class="leadership-avatar" onerror="this.outerHTML='&lt;div class=&quot;leadership-avatar-mono&quot;&gt;HS&lt;/div&gt;'">
+                    <div class="leadership-content">
+                        <h3 class="leadership-name">Hassan Sohail</h3>
+                        <div class="leadership-role">CTO</div>
+                        <p class="leadership-bio">
+                            Leading our technical strategy and architecture. Passionate about building robust backend systems, scalable multiplayer architecture, and optimizing performance across all platforms to deliver seamless gaming experiences.
+                        </p>
+                        <div class="leadership-social">
+                            <a href="https://www.linkedin.com/in/mian-hassan-sohail/" target="_blank">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="assets/images/team-abid.svg" alt="Abid" class="team-avatar">
+                    <h3 class="team-name">Abid</h3>
+                    <div class="team-role">Senior Artist</div>
+                </div>
+
+                <div class="team-card">
+                    <img src="assets/images/team-ayesha.svg" alt="Ayesha Ali" class="team-avatar">
+                    <h3 class="team-name">Ayesha Ali</h3>
+                    <div class="team-role">2D Artist</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL STACK SECTION -->
+    <section id="tech-stack" style="padding: 100px 0; background: linear-gradient(to right, #0a0a12, #150014);">
+        <div class="container">
+            <h2 class="section-title">Technical Stack</h2>
+            <div class="divider-gradient"></div>
+
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">&lt;/&gt;</div>
+                        <h3 class="project-title">Core Engine</h3>
+                        <p class="project-desc">Advanced Unity development utilizing C#, DOTS, and custom tooling for optimal performance across all platforms.</p>
+                        <div>
+                            <span class="platform-tag" style="border: 1px solid var(--accent-cyan); border-radius: 20px; padding: 4px 14px; margin-right: 8px; display: inline-block;">Unity 3D/2D</span>
+                            <span class="platform-tag" style="border: 1px solid rgba(255,255,255,0.2); color: #ccc; border-radius: 20px; padding: 4px 14px; display: inline-block;">C#</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">🌐</div>
+                        <h3 class="project-title">Multiplayer Architecture</h3>
+                        <p class="project-desc">Robust server authoritative networking, lag compensation, and scalable backend infrastructure for seamless multiplayer experiences.</p>
+                        <div>
+                            <span class="platform-tag" style="border: 1px solid var(--accent-purple); border-radius: 20px; padding: 4px 14px; margin-right: 8px; display: inline-block;">Photon PUN/Fusion</span>
+                            <span class="platform-tag" style="border: 1px solid rgba(255,255,255,0.2); color: #ccc; border-radius: 20px; padding: 4px 14px; margin-right: 8px; display: inline-block;">PlayFab</span>
+                            <span class="platform-tag" style="border: 1px solid rgba(255,255,255,0.2); color: #ccc; border-radius: 20px; padding: 4px 14px; display: inline-block;">Mirror</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">🥽</div>
+                        <h3 class="project-title">Immersive Tech</h3>
+                        <p class="project-desc">High-fidelity VR/AR simulations, custom physics interactions, and spatial computing solutions for next-gen headsets.</p>
+                        <div>
+                            <span class="platform-tag" style="border: 1px solid var(--accent-cyan); border-radius: 20px; padding: 4px 14px; margin-right: 8px; display: inline-block;">Meta Quest</span>
+                            <span class="platform-tag" style="border: 1px solid rgba(255,255,255,0.2); color: #ccc; border-radius: 20px; padding: 4px 14px; margin-right: 8px; display: inline-block;">SteamVR</span>
+                            <span class="platform-tag" style="border: 1px solid rgba(255,255,255,0.2); color: #ccc; border-radius: 20px; padding: 4px 14px; display: inline-block;">Auto Hand</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 2rem; margin-bottom: 15px;">💰</div>
+                        <h3 class="project-title">LiveOps &amp; Monetization</h3>
+                        <p class="project-desc">Seamless integration of IAP, rewarded ads, and analytics to maximize revenue without compromising player experience.</p>
+                        <div>
+                            <span class="platform-tag" style="border: 1px solid var(--accent-purple); border-radius: 20px; padding: 4px 14px; margin-right: 8px; display: inline-block;">AdMob</span>
+                            <span class="platform-tag" style="border: 1px solid rgba(255,255,255,0.2); color: #ccc; border-radius: 20px; padding: 4px 14px; display: inline-block;">Unity IAP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAREERS / JOIN THE TEAM SECTION -->
+    <section id="careers" style="padding: 100px 0;">
+        <div class="container">
+            <h2 class="section-title">Join The Titan Squad</h2>
+            <div class="divider-gradient"></div>
+            <p style="text-align:center; color: var(--text-gray); max-width: 700px; margin: -20px auto 40px; font-size: 1.1rem;">
+                We are always looking for passionate talent to help us forge the next generation of gaming experiences.
+            </p>
+
+            <div style="text-align: center; margin-bottom: 50px;">
+                <button class="btn-cta" onclick="window.location.href='mailto:noman3869@gmail.com?subject=Joining%20The%20Titan%20Squad&body=Hi%20Team%2C%0A%0AI%27d%20love%20to%20join%20Titanz%20Games.%20Here%27s%20a%20bit%20about%20me%20and%20my%20portfolio%3A%0A%0A'">Join Our Team</button>
+            </div>
+
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 1.6rem; margin-bottom: 12px; color: var(--accent-purple);">&lt;&gt;</div>
+                        <h3 class="project-title" style="font-size: 1.3rem;">Developer</h3>
+                        <p class="project-desc">Unity/Unreal experts pushing technical boundaries.</p>
+                        <button class="btn-link" onclick="window.location.href='mailto:noman3869@gmail.com?subject=Application%20-%20Developer'">Apply Now</button>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 1.6rem; margin-bottom: 12px; color: var(--accent-cyan);">🎨</div>
+                        <h3 class="project-title" style="font-size: 1.3rem;">Artist</h3>
+                        <p class="project-desc">Visionaries creating immersive 3D worlds and assets.</p>
+                        <button class="btn-link" onclick="window.location.href='mailto:noman3869@gmail.com?subject=Application%20-%20Artist'">Apply Now</button>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 1.6rem; margin-bottom: 12px; color: var(--accent-yellow);">🐛</div>
+                        <h3 class="project-title" style="font-size: 1.3rem;">QA</h3>
+                        <p class="project-desc">Ensuring every release meets triple-A standards.</p>
+                        <button class="btn-link" onclick="window.location.href='mailto:noman3869@gmail.com?subject=Application%20-%20QA'">Apply Now</button>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-content" style="padding: 30px;">
+                        <div style="font-size: 1.6rem; margin-bottom: 12px; color: var(--accent-purple);">🎓</div>
+                        <h3 class="project-title" style="font-size: 1.3rem;">Intern</h3>
+                        <p class="project-desc">The next generation of game dev superstars.</p>
+                        <button class="btn-link" onclick="window.location.href='mailto:noman3869@gmail.com?subject=Application%20-%20Intern'">Apply Now</button>
                     </div>
                 </div>
             </div>
@@ -554,6 +1293,10 @@ background-clip: text;  /* <--- ADD THIS LINE */
         <div class="container">
             <h2 class="section-title">Client Feedback</h2>
             <div class="divider-gradient"></div>
+
+            <a href="https://www.fiverr.com/game_dev3loper/" target="_blank" class="seller-badge">
+                🏅 <span>Level 2 Seller</span> on Fiverr — loved by clients across Fiverr, Upwork, App Store &amp; Google Play
+            </a>
 
             <div class="review-grid">
                 <div class="review-card">
@@ -600,8 +1343,9 @@ background-clip: text;  /* <--- ADD THIS LINE */
                 <a href="https://www.upwork.com/freelancers/~015eeb9799f638ed9c" target="_blank">Upwork</a>
                 <a href="https://www.fiverr.com/game_dev3loper" target="_blank">Fiverr</a>
                 <a href="https://www.linkedin.com/in/noman-nazir-37a983289/" target="_blank">LinkedIn</a>
+                <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
             </div>
-            
+
             <p class="copyright">Copyright © 2026 Titanz Games. All Rights Reserved.</p>
         </div>
     </footer>
@@ -637,8 +1381,109 @@ background-clip: text;  /* <--- ADD THIS LINE */
         </div>
     </div>
 
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+    <!-- THEME EDITOR (drag colors around live, then Copy CSS to hand the code back) -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleThemePanel()" title="Customize theme colors">🎨</button>
+    <div class="theme-panel" id="themePanel">
+        <h4>Theme Editor</h4>
+        <p class="theme-hint">Preview color changes live on this page. When you're happy, hit "Copy CSS" and send that block back to make it permanent.</p>
+
+        <div class="theme-row"><label for="tcBg">Background</label><input type="color" id="tcBg" data-var="--bg-color"></div>
+        <div class="theme-row"><label for="tcCard">Card Background</label><input type="color" id="tcCard" data-var="--card-bg"></div>
+        <div class="theme-row"><label for="tcCyan">Accent Cyan</label><input type="color" id="tcCyan" data-var="--accent-cyan"></div>
+        <div class="theme-row"><label for="tcPink">Accent Pink</label><input type="color" id="tcPink" data-var="--accent-purple"></div>
+        <div class="theme-row"><label for="tcYellow">Accent Yellow</label><input type="color" id="tcYellow" data-var="--accent-yellow"></div>
+        <div class="theme-row"><label for="tcText">Body Text</label><input type="color" id="tcText" data-var="--text-gray"></div>
+
+        <div class="theme-actions">
+            <button onclick="copyThemeCSS()">Copy CSS</button>
+            <button class="primary" onclick="resetThemeColors()">Reset</button>
+        </div>
+        <div class="theme-copy-msg" id="themeCopyMsg"></div>
+    </div>
+
     <!-- JAVASCRIPT -->
     <script>
+        // --- THEME EDITOR LOGIC ---
+        const THEME_DEFAULTS = {
+            '--bg-color': '#0a0a12',
+            '--card-bg': '#14141f',
+            '--accent-cyan': '#00ffcc',
+            '--accent-purple': '#ff2d78',
+            '--accent-yellow': '#ffe04a',
+            '--text-gray': '#b0b0bc'
+        };
+        const THEME_STORAGE_KEY = 'titanzThemeOverrides';
+        const root = document.documentElement;
+
+        function applyThemeVar(varName, value) {
+            root.style.setProperty(varName, value);
+        }
+
+        function loadThemeOverrides() {
+            let saved = {};
+            try { saved = JSON.parse(localStorage.getItem(THEME_STORAGE_KEY)) || {}; } catch (e) { saved = {}; }
+            document.querySelectorAll('.theme-panel input[type="color"]').forEach(input => {
+                const varName = input.dataset.var;
+                const value = saved[varName] || THEME_DEFAULTS[varName];
+                input.value = value;
+                applyThemeVar(varName, value);
+            });
+        }
+
+        function saveThemeOverride(varName, value) {
+            let saved = {};
+            try { saved = JSON.parse(localStorage.getItem(THEME_STORAGE_KEY)) || {}; } catch (e) { saved = {}; }
+            saved[varName] = value;
+            localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(saved));
+        }
+
+        function toggleThemePanel() {
+            document.getElementById('themePanel').classList.toggle('open');
+        }
+
+        function resetThemeColors() {
+            localStorage.removeItem(THEME_STORAGE_KEY);
+            loadThemeOverrides();
+            document.getElementById('themeCopyMsg').textContent = 'Reset to defaults.';
+            setTimeout(() => { document.getElementById('themeCopyMsg').textContent = ''; }, 2000);
+        }
+
+        function copyThemeCSS() {
+            const lines = Object.keys(THEME_DEFAULTS).map(varName => {
+                const value = root.style.getPropertyValue(varName).trim() || THEME_DEFAULTS[varName];
+                return `            ${varName}: ${value};`;
+            });
+            const cssText = `:root {\n${lines.join('\n')}\n        }`;
+            const msg = document.getElementById('themeCopyMsg');
+            const done = () => { msg.textContent = 'Copied! Paste into index.html or send it to me.'; setTimeout(() => { msg.textContent = ''; }, 3000); };
+            const fail = () => { msg.textContent = 'Copy failed — select and copy manually.'; };
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(cssText).then(done).catch(fail);
+            } else {
+                const ta = document.createElement('textarea');
+                ta.value = cssText;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); done(); } catch (e) { fail(); }
+                document.body.removeChild(ta);
+            }
+        }
+
+        document.querySelectorAll('.theme-panel input[type="color"]').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const varName = e.target.dataset.var;
+                applyThemeVar(varName, e.target.value);
+                saveThemeOverride(varName, e.target.value);
+            });
+        });
+
+        loadThemeOverrides();
+
         // Floating Button Logic
         window.addEventListener('scroll', function() {
             const btn = document.getElementById('ctaBtn');
@@ -647,11 +1492,13 @@ background-clip: text;  /* <--- ADD THIS LINE */
                     btn.classList.add('floating');
                     btn.innerText = "Start Project ✉";
                 }
+                document.getElementById('backToTop').classList.add('show');
             } else {
                 if (btn.classList.contains('floating')) {
                     btn.classList.remove('floating');
                     btn.innerText = "Start a Project";
                 }
+                document.getElementById('backToTop').classList.remove('show');
             }
         });
 
