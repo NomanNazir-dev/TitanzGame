@@ -593,13 +593,53 @@ background-clip: text;  /* <--- ADD THIS LINE */
         .founder-bio { font-size: 1.2rem; color: #ccc; margin-bottom: 30px; }
 
         /* --- TESTIMONIALS --- */
-        #testimonials { padding: 100px 0; background: #050505; }
+        #testimonials { padding: 100px 0; background: var(--bg-color); }
         .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .review-card { background: linear-gradient(145deg, #111, #0c0c0c); padding: 40px; border-radius: 20px; border-left: 4px solid var(--accent-cyan); position: relative; }
-        .review-card::before { content: "“"; position: absolute; top: 10px; left: 20px; font-size: 4rem; color: rgba(255,255,255,0.05); font-family: serif; }
-        .review-text { font-style: italic; font-size: 1.1rem; margin-bottom: 25px; color: #ddd; position: relative; z-index: 1; }
-        .client-name { font-weight: bold; color: var(--accent-purple); }
-        .source-tag { font-size: 0.8rem; color: #666; margin-top: 5px; }
+        .review-card {
+            background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)), var(--card-bg);
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-top: 3px solid var(--accent-cyan);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .review-card:nth-child(3n+2) { border-top-color: var(--accent-purple); }
+        .review-card:nth-child(3n+3) { border-top-color: var(--accent-yellow); }
+        .review-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .review-card::before {
+            content: "❝";
+            position: absolute;
+            top: 12px; right: 22px;
+            font-size: 2.8rem;
+            color: rgba(255,255,255,0.05);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .review-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; position: relative; z-index: 1; }
+        .review-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0a0a12;
+        }
+        .review-avatar.upwork { background: linear-gradient(135deg, var(--accent-cyan), #00c2ff); }
+        .review-avatar.fiverr { background: linear-gradient(135deg, var(--accent-purple), var(--accent-yellow)); }
+        .review-stars { color: var(--accent-yellow); letter-spacing: 3px; margin-bottom: 14px; font-size: 0.95rem; position: relative; z-index: 1; }
+        .review-text { font-style: italic; font-size: 1.05rem; margin-bottom: 0; color: #ddd; position: relative; z-index: 1; }
+        .client-name { font-weight: bold; color: #fff; font-size: 0.95rem; }
+        .source-tag { font-size: 0.78rem; color: #777; margin-top: 2px; }
 
         /* --- CTA BUTTONS --- */
         .btn-cta {
@@ -786,12 +826,12 @@ background-clip: text;  /* <--- ADD THIS LINE */
     <nav class="top-nav">
         <span class="nav-logo">Titanz Games</span>
         <div class="nav-links">
+            <a href="#testimonials">Feedback</a>
             <a href="#game-grid">Games</a>
             <a href="#portfolio">Projects</a>
             <a href="#team">Team</a>
             <a href="#tech-stack">Tech Stack</a>
             <a href="#careers">Careers</a>
-            <a href="#testimonials">Feedback</a>
         </div>
         <button class="nav-cta" onclick="openModal()">Start Project</button>
     </nav>
@@ -833,6 +873,87 @@ background-clip: text;  /* <--- ADD THIS LINE */
             </div>
         </div>
     </div>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Client Feedback</h2>
+            <div class="divider-gradient"></div>
+
+            <a href="https://www.fiverr.com/game_dev3loper/" target="_blank" class="seller-badge">
+                🏅 <span>Level 2 Seller</span> on Fiverr — loved by clients across Fiverr, Upwork, App Store &amp; Google Play
+            </a>
+
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar upwork">🇺🇸</div>
+                        <div>
+                            <div class="client-name">Verified Client (USA)</div>
+                            <div class="source-tag">Via Upwork</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Exceptional Multiplayer Integration. Titanz Games handled the synchronization and lag compensation perfectly."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar upwork">🇬🇧</div>
+                        <div>
+                            <div class="client-name">Verified Client (UK)</div>
+                            <div class="source-tag">Via Upwork</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Saved Our Project. They fixed the save-system errors and optimized the game's performance, increasing our FPS by 30%."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar upwork">🇩🇪</div>
+                        <div>
+                            <div class="client-name">Verified Client (Germany)</div>
+                            <div class="source-tag">Via Upwork</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Delivered a complete prototype for our Steam sandbox concept. The team understood the vision immediately. Clean, modular code."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar fiverr">✓</div>
+                        <div>
+                            <div class="client-name">Verified Buyer</div>
+                            <div class="source-tag">Via Fiverr</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Best Unity Developers on Fiverr! Delivered a polished product with smooth physics and addictive gameplay. Just like Suika!"</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar fiverr">✓</div>
+                        <div>
+                            <div class="client-name">Verified Buyer</div>
+                            <div class="source-tag">Via Fiverr</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Fast turnaround. Handled AdMob and IAP integration perfectly. The game is live and generating revenue. Thank you!"</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar fiverr">✓</div>
+                        <div>
+                            <div class="client-name">Verified Buyer</div>
+                            <div class="source-tag">Via Fiverr</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"High quality 3D work. Set up the lighting and 'Auto Hand' VR mechanics exactly as requested for the Meta Quest."</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- GAME ICON GRID -->
     <section id="game-grid">
@@ -1288,50 +1409,6 @@ background-clip: text;  /* <--- ADD THIS LINE */
         </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION -->
-    <section id="testimonials">
-        <div class="container">
-            <h2 class="section-title">Client Feedback</h2>
-            <div class="divider-gradient"></div>
-
-            <a href="https://www.fiverr.com/game_dev3loper/" target="_blank" class="seller-badge">
-                🏅 <span>Level 2 Seller</span> on Fiverr — loved by clients across Fiverr, Upwork, App Store &amp; Google Play
-            </a>
-
-            <div class="review-grid">
-                <div class="review-card">
-                    <p class="review-text">"Exceptional Multiplayer Integration. Titanz Games handled the synchronization and lag compensation perfectly."</p>
-                    <div class="client-name">Verified Client (USA)</div>
-                    <div class="source-tag">Via Upwork</div>
-                </div>
-                <div class="review-card">
-                    <p class="review-text">"Saved Our Project. They fixed the save-system errors and optimized the game's performance, increasing our FPS by 30%."</p>
-                    <div class="client-name">Verified Client (UK)</div>
-                    <div class="source-tag">Via Upwork</div>
-                </div>
-                <div class="review-card">
-                    <p class="review-text">"Delivered a complete prototype for our Steam sandbox concept. The team understood the vision immediately. Clean, modular code."</p>
-                    <div class="client-name">Verified Client (Germany)</div>
-                    <div class="source-tag">Via Upwork</div>
-                </div>
-                <div class="review-card">
-                    <p class="review-text">"Best Unity Developers on Fiverr! Delivered a polished product with smooth physics and addictive gameplay. Just like Suika!"</p>
-                    <div class="client-name">Verified Buyer</div>
-                    <div class="source-tag">Via Fiverr</div>
-                </div>
-                <div class="review-card">
-                    <p class="review-text">"Fast turnaround. Handled AdMob and IAP integration perfectly. The game is live and generating revenue. Thank you!"</p>
-                    <div class="client-name">Verified Buyer</div>
-                    <div class="source-tag">Via Fiverr</div>
-                </div>
-                <div class="review-card">
-                    <p class="review-text">"High quality 3D work. Set up the lighting and 'Auto Hand' VR mechanics exactly as requested for the Meta Quest."</p>
-                    <div class="client-name">Verified Buyer</div>
-                    <div class="source-tag">Via Fiverr</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- FOOTER -->
     <footer>
