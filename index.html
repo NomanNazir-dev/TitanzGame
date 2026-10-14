@@ -61,7 +61,7 @@ h2 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin-top: 14px; }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 20px; }
 .brand { font: 800 1.45rem/1 var(--display); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
 .brand b { color: var(--cyan); }
-.brand img { width: 34px; height: 34px; border-radius: 6px; object-fit: cover; }
+.brand img { height: 38px; width: auto; }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: .98rem; }
 .nav-links a:hover { color: var(--text); }
@@ -212,7 +212,9 @@ textarea { min-height: 130px; resize: vertical; }
 form .note { font-size: .85rem; color: var(--muted); }
 
 footer { border-top: 1px solid var(--line); padding-block: 30px; color: var(--muted); font-size: .9rem; }
-footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.foot-brand { display: flex; align-items: center; gap: 18px; }
+.foot-brand img { width: 112px; height: auto; }
 footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
 footer a { text-decoration: none; }
 footer a:hover { color: var(--cyan); }
@@ -249,7 +251,7 @@ footer a:hover { color: var(--cyan); }
 
 <header class="nav">
   <div class="wrap">
-    <a href="#" class="brand">TITANZ <b>GAMES</b></a>
+    <a href="#" class="brand"><img src="assets/images/logo-mark.png" alt="" width="73" height="38">TITANZ <b>GAMES</b></a>
     <nav class="nav-links" id="navLinks">
       <a href="#services">Services</a>
       <a href="#work">Work</a>
@@ -603,7 +605,7 @@ footer a:hover { color: var(--cyan); }
 
 <footer>
   <div class="wrap">
-    <span>© <span id="year">2026</span> Titanz Games</span>
+    <div class="foot-brand"><img src="assets/images/logo-full.png" alt="Titanz Games logo" width="112" height="87" loading="lazy"><span>© <span id="year">2026</span> Titanz Games</span></div>
     <nav>
       <a href="mailto:contact@titanzgame.com">contact@titanzgame.com</a>
       <a href="https://www.linkedin.com/in/noman-nazir-37a983289/" target="_blank" rel="noopener">LinkedIn</a>
